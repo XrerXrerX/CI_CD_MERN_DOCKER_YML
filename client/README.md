@@ -1,3 +1,7 @@
+#LINK PREVIEW : https://mern-qurious.onrender.com/
+email : fakeperson@gmail.com
+password : fakeperson
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
