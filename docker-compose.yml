@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  client_app:
+    container_name: client_app
+    image: xrerxrerx/client_app:1.2
+    ports:
+      - "3000:3000"
+  server_app:
+    container_name: server_app
+    image: xrerxrerx/server_app:1.1
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URL=mongodb://admin:admin@mongodb:27017/
+      - JWT_SECRET=qq123456
+      - PORT=3001
+    depends_on:
+      - mongo-express
+  mongodb:
+    container_name: "mongodb"
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+  mongo-express:
+    container_name: "mongo-express"
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    restart: unless-stopped
+    depends_on:
+      - mongodb
